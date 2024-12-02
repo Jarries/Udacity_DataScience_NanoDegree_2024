@@ -20,12 +20,14 @@ Ultimately, this blog post is a reflection on our collective journey through a c
 - Pandas
 - Numpy
 - Matplotlib
-- Random
+- Random (build in python package)
+See this in the requirement.txt file.
 
 
 ## Files in the Repository
 - Data Folder containing all the .csv files for the data that was used in the notebook. This data folder contains no data but I have done analysis on years 2014 to 2024. Please download the .csv files and load into the Data folder. I have not commited the files because of size limitations. Download now -> https://survey.stackoverflow.co/
 - Notebooks folder containing the actual notebook.
+- requirements.txt file to easily install the required libraries by using the pip install -r requirement.txt command.
 
 ## Summary of the results
 The COVID-19 pandemic significantly impacted developers’ productivity and work-life balance, with many facing challenges in setting up home offices and managing communication. While some developers thrived in the flexible work environment, others struggled with blurred boundaries between work and personal life, leading to increased stress. Ultimately, the pandemic underscored the importance of maintaining a healthy work-life balance to ensure long-term productivity and well-being.
