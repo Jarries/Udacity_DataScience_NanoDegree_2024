@@ -1,15 +1,15 @@
 # Disaster Response Pipeline Project
 
-### Instructions:
-1. Run the following commands in the project's root directory to set up your database and model.
+- The README file includes a summary of the project, how to run the Python scripts and web app, and an explanation of the files in the repository. Comments are used effectively and each function has a docstring.
 
-    - To run ETL pipeline that cleans data and stores in database
-        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
-    - To run ML pipeline that trains classifier and saves
-        `python models/train_classifier.py data/DisasterResponse.db models/pyth.pkl`
+- sdfsd
 
-2. Go to `app` directory: `cd app`
 
-3. Run your web app: `python run.py`
-
-4. Click the `PREVIEW` button to open the homepage
+## Suggestions to Make Your Project Stand Out
+- Go into more detail about the dataset and your data cleaning and modeling process in your README file, add screenshots of your web app and model results.
+- Add more visualizations to the web app.
+- Based on the categories that the ML algorithm classifies text into, advise some organizations to connect to.
+- Customize the design of the web app.
+- Deploy the web app to a cloud service provider.
+- Improve the efficiency of the code in the ETL and ML pipeline.
+- This dataset is imbalanced (ie some labels like water have few examples). In your README, discuss how this imbalance, how that affects training the model, and your thoughts about emphasizing precision or recall for the various categories.
