@@ -54,6 +54,22 @@ model = joblib.load("../models/classifier.pkl")
 @app.route('/')
 @app.route('/index')
 def index():
+    """
+    Renders the main page of the web application with visualizations.
+
+    This function extracts data needed for visualizations from the DataFrame `df`,
+    creates various Plotly graphs (Pie and Bar charts), encodes them in JSON format,
+    and renders the 'master.html' template with the graphs.
+
+    Visualizations created:
+    1. Distribution of Message Genres (Pie chart)
+    2. Distribution of Related Messages (Bar chart)
+    3. Top 10 Categories in Messages (Bar chart)
+    4. Distribution of Direct Reports (Bar chart)
+
+    Returns:
+        Rendered HTML template with embedded Plotly graphs.
+    """
     
     # extract data needed for visuals
     genre_counts = df['genre'].value_counts()
@@ -155,6 +171,21 @@ def index():
 # web page that handles user query and displays model results
 @app.route('/go')
 def go():
+    """
+    Renders the results page of the web application with classification results and contact information.
+
+    This function retrieves the user's query from the request arguments, uses the trained machine learning model
+    to predict the classification labels for the query, and maps the classification results to the corresponding
+    categories. It also provides a dictionary of contact information with funny names for each category.
+
+    The function then renders the 'go.html' template with the following data:
+    - query: The user's input query.
+    - classification_result: A dictionary mapping each category to its predicted classification label.
+    - contact_info: A dictionary mapping each category to a funny contact organization name.
+
+    Returns:
+        Rendered HTML template with the classification results and contact information.
+    """
     query = request.args.get('query', '') 
 
     # use model to predict classification for query
