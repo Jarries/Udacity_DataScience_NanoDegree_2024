@@ -43,7 +43,7 @@ def tokenize(text):
 
 # load data
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
-df = pd.read_sql_table('messages', engine)
+df = pd.read_sql_table('disaster_messages', engine)
 for column in df.columns[4:]:
     df[column] = pd.to_numeric(df[column], errors='coerce')
 
