@@ -1,39 +1,75 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Disasters</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <title>Disasters</title>
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f8f9fa;
+            }
+            .navbar {
+                background-color: #343a40;
+            }
+            .navbar-brand, .nav-link {
+                color: #ffffff !important;
+            }
+            .jumbotron {
+                background: linear-gradient(to right, #6a11cb, #2575fc);
+                color: #ffffff;
+                padding: 2rem 1rem;
+            }
+            .jumbotron h1, .jumbotron p {
+                margin-bottom: 1rem;
+            }
+            .form-control {
+                margin-bottom: 1rem;
+            }
+            .btn-success {
+                background-color: #28a745;
+                border: none;
+            }
+            .btn-success:hover {
+                background-color: #218838;
+            }
+            .page-header {
+                margin-top: 2rem;
+            }
+        </style>
+    </head>
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Disaster Response Project</a>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Disaster Response</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="https://www.udacity.com/" target="_blank">Made with Udacity</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://github.com/" target="_blank">Contact us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://github.com/Jarries/Udacity_DataScience_NanoDegree_2024/tree/main/4.0%20Data%20Engineering/Disaster%20Response%20Project" target="_blank">Github Files</a></li>
+                </ul>
+            </div>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="https://www.udacity.com/">Made with Udacity</a></li>
-                <li><a href="https://github.com/">Contact</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    </nav>
 
 
-<div class="jumbotron">
+<div class="jumbotron text-center">
     <div class="container">
-        <h1 class="text-center">Disaster Response Project</h1>
-        <p class="text-center">Analyzing message data for disaster response</p>
+        <h1 class="text-center">Disaster Response Message Classifier</h1>
+        <p>Analyzing message data for disaster response</p>
+        <p>Please scroll down to see some interesting statistics</p>
         <hr />
       
         <div class="row">
@@ -55,7 +91,7 @@
 <div class="container">
     {% block content %}
         <div class="page-header">
-            <h1 class="text-center">Overview of Training Dataset</h1>
+            <h1 class="text-center">Interesting Graphs On The Training Data</h1>
         </div>
     {% endblock %}
 
@@ -71,6 +107,6 @@
         Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
     }
 </script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
