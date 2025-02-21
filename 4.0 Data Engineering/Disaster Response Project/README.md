@@ -16,6 +16,9 @@ The machine learning model used in this project is designed to analyze and class
 3. **Model Training**: The processed data is used to train a machine learning model. In this case, a MultiOutputClassifier with a RandomForestClassifier is used to handle the multi-label classification problem.
 4. **Model Evaluation**: The model's performance is evaluated using metrics like precision, recall, and F1-score to ensure it accurately classifies the messages.
 
+The model that was selected was RandomForestClassifier. The average precision of the model over all message categories was **93%**.
+The model was fine-tuned using [scikit-learn GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Also, a ML pipeline was employed using [scikit-learn Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html).
+
 ## Web Application
 
 A web application dashboard was created using [Flask](http://flask.pocoo.org/) and [Plotly](https://plot.ly/) to provide an interactive interface for users. The dashboard has the following features:
