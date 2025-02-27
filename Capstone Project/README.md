@@ -1,5 +1,3 @@
-# Link to Web app: [https://udacity-starbucks-capstone.herokuapp.com/](https://udacity-starbucks-capstone.herokuapp.com/)
-
 # Starbucks Capstone Project
 
 ## Project Overview
