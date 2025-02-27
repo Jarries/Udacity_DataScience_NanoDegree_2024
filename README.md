@@ -16,3 +16,11 @@ In this directory one will find the data used for the following blog post:
 In this directory one will find all the files for this project.
 
 ![image](4.0%20Data%20Engineering/Disaster%20Response%20Project/assets/images/input1.jpg)
+
+## Project 3: Recommendations With IBM
+
+5.0 Expermental Design and Recommendations -> Recommendations with IBM Project
+
+In this directory one will find all the files for this project.
+
+## Project: Capstone Project

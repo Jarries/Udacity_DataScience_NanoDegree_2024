@@ -1,0 +1,244 @@
+{% extends "master.html" %}
+
+
+{% block content %}
+
+<div class = "row">
+    <div class="col-md-6 form-group-lg">
+        <form>
+            {% from "_formhelpers.html" import render_field %}
+            <div class="form-group">
+                <label for="user_id">User ID:</label>
+                {{ render_field(form.user_id, class="form-control") }}
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    User Information
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        Age: <span id="age-item">{{ data.get('user_info').get('age') }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        Income: <span id="income-item">{{ data.get('user_info').get('income') }}</span> $
+                    </li>
+                    <li class="list-group-item">
+                        Gender: <span id="gender-item">
+                            {% if data.get('user_info').get('gender_M') == 1.0 %}
+                                Male
+                            {% elif data.get('user_info').get('gender_F') == 1.0 %}
+                                Female
+                            {% else %}
+                                Other
+                            {% endif %}
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        Became member on: <span id="became-member-item">
+                            {% for key, value in data.get('user_info').items() %}
+                                {% if key.startswith('became') and value == 1.0 %}
+                                    {{ key.split('_')[-1] }}
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 form-group-lg">
+        <form>
+            <div class="form-group">
+                <label for="offer_id">Offer ID:</label>
+                {{ render_field(form.offer_id, class="form-control") }}
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    Offer Information
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        Difficulty: <span id="difficulty-item">{{ data.get('offer_info').get('difficulty') }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        Reward: <span id="reward-item">{{ data.get('offer_info').get('reward') }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        Duration in hours: <span id="duration-item">{{ data.get('offer_info').get('duration_hours') }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        Offer type: <span id="offer-type-item">
+                            {% for key, value in data.get('offer_info').items() %}
+                                {% if key.startswith('offer_type') and value == 1.0 %}
+                                    {{ key.split('_')[-1] }}
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class = "row">
+    <div class="col-md-12 form-group-lg">
+        <div class="form-group">
+            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="predict()" style="background: #006341;">Predict</button>
+        </div>
+    </div>
+    
+</div>        
+<div class = "row">
+    <div class="col-md-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                Prediction Result
+            </div>
+            <div class="card-body text-center">
+                <h2>Should we send the offer to that user?</h2>
+                <span id="prediction-item" class="display-4"></span>
+            </div>
+        </div>
+    </div>
+</div>        
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        var user_id_select = document.getElementById("user_id");
+        var age_item = document.getElementById("age-item");
+        var income_item = document.getElementById("income-item");
+        var gender_item = document.getElementById("gender-item");
+        var became_member_item = document.getElementById("became-member-item");
+
+        user_id_select.onchange = function()  {
+            var user_id = user_id_select.value;
+
+            fetch('/update/' + user_id).then(function(response) {
+                response.json().then(function(data) {
+
+                    // Update age.
+                    age = data.user_info.age
+                    var optionHTML = '';
+                    optionHTML += age;
+                    age_item.innerHTML = optionHTML;
+
+                    // Update income.
+                    income = data.user_info.income;
+                    var optionHTML = '';
+                    optionHTML += income;
+                    income_item.innerHTML = optionHTML;
+
+                    // Update gender.
+                    var optionHTML = '';
+                    if (data.user_info.gender_M == 1.0){
+                        var gender = 'Male'
+                    }
+                    else if (data.user_info.gender_F == 1.0){
+                        var gender = 'Female'
+                    }
+                    else {
+                        var gender = 'Other'
+                    }
+                    optionHTML += gender;
+                    gender_item.innerHTML = optionHTML;
+
+                    // Update became member on.
+                    var optionHTML = '';
+                    var resultValue;
+                    for (var key in data.user_info){
+                        value = data.user_info[key];
+                        if (key.startsWith('became')){
+                            if (value == 1.0) {
+                                var resultValue = String(key).split("_").slice(-1)[0];
+                            }
+                        }
+                    };
+                    optionHTML += resultValue;
+                    became_member_item.innerHTML = optionHTML;
+
+                });
+
+            });
+        };
+
+
+        var offer_id_select = document.getElementById("offer_id");
+        var difficulty_item = document.getElementById("difficulty-item");
+        var reward_item = document.getElementById("reward-item");
+        var duration_item = document.getElementById("duration-item");
+        var offer_type_item = document.getElementById("offer-type-item");
+
+        offer_id_select.onchange = function()  {
+            var offer_id = offer_id_select.value;
+
+            fetch('/update-offer/' + offer_id).then(function(response) {
+                response.json().then(function(data) {
+
+                    // Update difficulty.
+                    difficulty = data.offer_info.difficulty
+                    var optionHTML = '';
+                    optionHTML += difficulty;
+                    difficulty_item.innerHTML = optionHTML;
+
+                    // Update reward.
+                    reward = data.offer_info.reward
+                    var optionHTML = '';
+                    optionHTML += reward;
+                    reward_item.innerHTML = optionHTML;
+
+                    // Update duration.
+                    duration = data.offer_info.duration_hours
+                    var optionHTML = '';
+                    optionHTML += duration;
+                    duration_item.innerHTML = optionHTML;
+
+                    // Update offer type.
+                    var optionHTML = '';
+                    var resultValue;
+                    for (var key in data.offer_info){
+                        value = data.offer_info[key];
+                        if (key.startsWith('offer_type')){
+                            if (value == 1.0) {
+                                var resultValue = String(key).split("_").slice(-1)[0];
+                            }
+                        }
+                    };
+                    optionHTML += resultValue;
+                    offer_type_item.innerHTML = optionHTML;
+
+                });
+
+            });
+        };
+
+        function predict(){
+            var user_id = user_id_select.value;
+            var offer_id = offer_id_select.value;
+            var prediction_item = document.getElementById("prediction-item");
+            prediction_item.innerHTML = '';
+
+            fetch('/predict/' + offer_id + '/' + user_id).then(function(response) {
+                response.json().then(function(data) {
+                    var prediction = data.prediction;
+
+                    if (prediction === 1){
+                        var prediction_value = '<h3 style="color: green">Yes, Campaign them now!!</h3>'
+                    }
+                    else if (prediction === 0) {
+                        var prediction_value = '<h3 style="color: red">NOPE!</h3>'
+                    };
+
+                    prediction_item.innerHTML = prediction_value;
+
+                });
+
+            });
+
+        };
+
+    </script>
+{% endblock %}
